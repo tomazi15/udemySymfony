@@ -11,3 +11,9 @@
 /app/logs/*
 !app/logs/.gitkeep
 /app/phpunit.xml
+
+#IDE metadata
+.idea/*
+
+#Bash files
+run.sh
