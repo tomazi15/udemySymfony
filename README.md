@@ -1,4 +1,4 @@
 symfony2blog
 ============
 
-A Symfony project created on April 25, 2016, 11:04 am.
+This repository is a blue print of my Symfony2 tutorial progress
