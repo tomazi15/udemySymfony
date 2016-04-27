@@ -32,7 +32,7 @@ class Post extends TimeStampable
     private $title;
 
     /**
-     * @var strine
+     * @var string
      *
      * @Gedmo\Slug(fields={"title"}, unique=false)
      * @ORM\Column(length=255)
