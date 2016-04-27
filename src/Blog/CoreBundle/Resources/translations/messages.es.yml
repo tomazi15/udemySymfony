@@ -1,3 +1,9 @@
 home: Inicio
+
+by: por
+read.more: Leer mas
+
 post:
   plural: Posts
+  latest: Ultimos posts
+  on: Publicado en
