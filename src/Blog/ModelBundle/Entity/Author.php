@@ -5,6 +5,7 @@ namespace Blog\ModelBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Author
@@ -30,6 +31,14 @@ class Author extends TimeStampable
      * @Assert\NotBlank
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"}, unique=false)
+     * @ORM\Column(length=255)
+     */
+    private $slug;
 
     /**
      * @var ArrayCollection
@@ -80,6 +89,30 @@ class Author extends TimeStampable
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Author
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Add posts
      *
      * @param \Blog\ModelBundle\Entity\Post $posts
@@ -110,5 +143,12 @@ class Author extends TimeStampable
     public function getPosts()
     {
         return $this->posts;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
     }
 }
