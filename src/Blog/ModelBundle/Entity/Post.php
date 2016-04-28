@@ -140,7 +140,7 @@ class Post extends TimeStampable
     /**
      * Set author
      *
-     * @param \Blog\ModelBundle\Entity\Author $author
+     * @param Author $author
      * @return Post
      */
     public function setAuthor(Author $author)
@@ -153,7 +153,7 @@ class Post extends TimeStampable
     /**
      * Get author
      *
-     * @return \Blog\ModelBundle\Entity\Author 
+     * @return Author
      */
     public function getAuthor()
     {
