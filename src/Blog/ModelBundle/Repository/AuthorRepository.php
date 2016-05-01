@@ -16,7 +16,7 @@ class AuthorRepository extends EntityRepository
      *
      * @return Author
      */
-    public function findFirstAuthor()
+    public function findFirst()
     {
         $qb = $this->getQueryBuilder()
             ->orderBy('a.id', 'asc')
