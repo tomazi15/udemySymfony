@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20160428183617 extends AbstractMigration
+class Version20160503004927 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,13 @@ class Version20160428183617 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
-        $this->addSql('ALTER TABLE author ADD COLUMN slug VARCHAR(255) NULL');
+        $this->addSql('CREATE TABLE comment (id INTEGER NOT NULL, post_id INTEGER NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, authorName VARCHAR(100) NOT NULL, body CLOB NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_9474526C4B89032C ON comment (post_id)');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__author AS SELECT id, name, created_at, updated_at, slug FROM author');
+        $this->addSql('DROP TABLE author');
+        $this->addSql('CREATE TABLE author (id INTEGER NOT NULL, name VARCHAR(100) NOT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('INSERT INTO author (id, name, created_at, updated_at, slug) SELECT id, name, created_at, updated_at, slug FROM __temp__author');
+        $this->addSql('DROP TABLE __temp__author');
         $this->addSql('DROP INDEX IDX_5A8A6C8DF675F31B');
         $this->addSql('CREATE TEMPORARY TABLE __temp__post AS SELECT id, author_id, title, body, created_at, slug, updated_at FROM post');
         $this->addSql('DROP TABLE post');
@@ -36,10 +42,11 @@ class Version20160428183617 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
-        $this->addSql('CREATE TEMPORARY TABLE __temp__author AS SELECT id, created_at, updated_at, name FROM author');
+        $this->addSql('DROP TABLE comment');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__author AS SELECT id, created_at, updated_at, name, slug FROM author');
         $this->addSql('DROP TABLE author');
-        $this->addSql('CREATE TABLE author (id INTEGER NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, name VARCHAR(100) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('INSERT INTO author (id, created_at, updated_at, name) SELECT id, created_at, updated_at, name FROM __temp__author');
+        $this->addSql('CREATE TABLE author (id INTEGER NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, name VARCHAR(100) NOT NULL, slug VARCHAR(255) DEFAULT NULL COLLATE BINARY, PRIMARY KEY(id))');
+        $this->addSql('INSERT INTO author (id, created_at, updated_at, name, slug) SELECT id, created_at, updated_at, name, slug FROM __temp__author');
         $this->addSql('DROP TABLE __temp__author');
         $this->addSql('DROP INDEX IDX_5A8A6C8DF675F31B');
         $this->addSql('CREATE TEMPORARY TABLE __temp__post AS SELECT id, author_id, created_at, updated_at, title, slug, body FROM post');
