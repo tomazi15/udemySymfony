@@ -1,0 +1,10 @@
+<article class="comment" xmlns="http://www.w3.org/1999/html">
+    <header>
+        <p>
+            {{ 'on' | trans |  capitalize }} <time datetime="{{ comment.createdAt|date('c') }}"{{ comment.createdAt | date}}</time>
+            {{ 'by' | trans }} {{ comment.authorName }}
+        </p>
+    </header>
+
+    <p>{{ comment.body | nl2br }}</p>
+</article>
