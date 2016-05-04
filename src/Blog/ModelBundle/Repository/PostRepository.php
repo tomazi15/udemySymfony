@@ -3,6 +3,7 @@
 namespace Blog\ModelBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Blog\ModelBundle\Entity\Post;
 
 /**
  * Class PostRepository
@@ -40,7 +41,7 @@ class PostRepository extends EntityRepository
             ->orderBy('p.id', 'asc')
             ->setMaxResults(1);
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getSingleResult();
     }
 
     private function getQueryBuilder()

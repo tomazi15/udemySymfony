@@ -1,5 +1,6 @@
 home: Home
 
+on: on
 by: by
 read.more: Read more
 
@@ -7,3 +8,13 @@ post:
   plural: Posts
   latest: Latest posts
   on: Posted on
+  by: Posted by
+  by.author: Posts by %name%
+  comments: '{0} No comments|{1} %count% comment|]1,inf] %count% comments'
+
+comment:
+  plural: Comments
+
+author:
+  title: Author
+  empty.posts: This author did not write any post yet.
