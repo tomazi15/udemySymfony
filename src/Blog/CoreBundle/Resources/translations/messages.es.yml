@@ -12,7 +12,7 @@ post:
   on: Publicado en
   by: Posts por
   by.author: Posts por %name%
-  comments: '{0} Sin Comentarios |{1} %count% comentario|]1,inf] %count% comentario'
+#  comments: '{0} Sin Comentarios |{1} %count% comentario|]1,inf] %count% comentario'
 
 comment:
   singular: Comentario
