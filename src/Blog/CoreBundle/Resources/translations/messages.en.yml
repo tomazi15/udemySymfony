@@ -12,7 +12,7 @@ post:
   on: Posted on
   by: Posted by
   by.author: Posts by %name%
-  comments: '{0} No comments| {1} %count% comment|]2,inf] %count% comments'
+#  comments: '{0} No comments|{1} %count% comments|]1,inf[ %count% comments'
 
 comment:
   singular: Comment
